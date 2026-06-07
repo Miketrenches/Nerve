@@ -5,8 +5,8 @@
 const { loadState, saveState } = require("./_lib/state");
 
 const FIELD_LIMITS = {
-  title:    { min: 3,   max: 200  },
-  brief:    { min: 5,   max: 1000 },
+  title:    { min: 1,   max: 200  },
+  brief:    { min: 1,   max: 1000 },
   prize:    { min: 1,   max: 100  },
   duration: { min: 1,   max: 50   },
   contact:  { min: 1,   max: 100  }
