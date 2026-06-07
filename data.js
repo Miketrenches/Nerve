@@ -10,7 +10,7 @@ window.NERVE_DATA = {
   token: {
     contract: "PASTE_CONTRACT_ADDRESS_HERE",
     pumpfun:  "https://pump.fun/",
-    twitter:  "https://x.com/",
+    twitter:  "https://x.com/NerveOnPump",
     telegram: "https://t.me/"
   },
 
