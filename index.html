@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>NERVE</title>
+  <meta name="description" content="NERVE. Are you a watcher or a player?" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-view="home">
+
+  <!-- ===================== background ===================== -->
+  <div class="bg">
+    <video id="bgVideo" autoplay muted loop playsinline poster="assets/vee-desk.png">
+      <source src="assets/trailer.mp4" type="video/mp4" />
+    </video>
+    <div class="bg__shade"></div>
+    <div class="bg__scanlines"></div>
+  </div>
+
+  <!-- ===================== top bar (always present) ===================== -->
+  <header class="top">
+    <nav class="links">
+      <a class="link" id="lnkPump" target="_blank" rel="noopener">PUMP.FUN</a>
+      <a class="link" id="lnkX"    target="_blank" rel="noopener">X</a>
+    </nav>
+  </header>
+
+  <!-- ===================== HOME ===================== -->
+  <section class="view view--home" data-view="home">
+    <h1 class="logo">NERVE</h1>
+    <p class="prompt">ARE YOU A</p>
+    <div class="cta">
+      <button class="cta-btn cta-btn--watcher" data-go="watcher">WATCHER</button>
+      <span class="cta-or">OR</span>
+      <button class="cta-btn cta-btn--player"  data-go="player">PLAYER</button>
+    </div>
+
+  </section>
+
+  <!-- ===================== PLAYER ===================== -->
+  <section class="view view--player" data-view="player">
+    <header class="view__head">
+      <button class="back" data-go="home">BACK</button>
+      <h2 class="view__title">OPEN BOUNTIES</h2>
+      <div class="view__count" id="playerCount"></div>
+    </header>
+    <div class="cards" id="playerCards"></div>
+    <footer class="pager">
+      <button class="pager__btn" data-pager="player" data-dir="-1">PREV</button>
+      <span class="pager__num" id="playerPage">1 / 1</span>
+      <button class="pager__btn" data-pager="player" data-dir="1">NEXT</button>
+    </footer>
+    <p class="disclaimer">
+      Accept at your own risk. Do not attempt anything illegal, dangerous, or harmful to yourself or
+      others. Players act independently and are solely responsible for their own choices. NERVE and
+      its operators are not liable for any injury, loss, legal consequence, or damage arising from a
+      bounty attempt. By accepting, you confirm you are of legal age and acting of your own free will.
+    </p>
+  </section>
+
+  <!-- ===================== WATCHER (Request a Bounty + Feed) ===================== -->
+  <section class="view view--watcher" data-view="watcher">
+    <header class="view__head">
+      <button class="back" data-go="home">BACK</button>
+      <h2 class="view__title">REQUEST A BOUNTY</h2>
+      <div class="view__count">WATCHERS ONLY</div>
+    </header>
+
+    <div class="watcher-cols">
+
+      <form class="request" id="requestForm" novalidate>
+        <p class="request__lead">Got a dare in mind? Submit it. If we like it, we run it.</p>
+        <p class="request__limit">ONE REQUEST PER VISITOR &mdash; RE-SUBMITTING REPLACES YOUR PREVIOUS ONE.</p>
+
+        <div class="request__grid">
+          <div class="field field--full">
+            <label class="field__lbl" for="reqTitle">DARE</label>
+            <input class="field__input" id="reqTitle" name="title" type="text" maxlength="60" placeholder="What's the dare?" required autocomplete="off" />
+          </div>
+
+          <div class="field field--full">
+            <label class="field__lbl" for="reqBrief">DETAILS</label>
+            <textarea class="field__input field__textarea" id="reqBrief" name="brief" maxlength="280" rows="3" placeholder="Be specific. What needs to happen, and how do you know it counts?" required></textarea>
+            <span class="field__counter" id="reqBriefCount">0 / 280</span>
+          </div>
+
+          <div class="field field--full">
+            <label class="field__lbl">REFERENCE IMAGE</label>
+            <label class="attach" id="attachZone" tabindex="0">
+              <input type="file" id="reqImage" accept="image/*" hidden />
+              <div class="attach__empty">
+                <span class="attach__cta">ATTACH IMAGE</span>
+                <span class="attach__hint">OPTIONAL  /  PNG, JPG, WEBP  /  MAX 4MB</span>
+              </div>
+              <div class="attach__filled" hidden>
+                <img class="attach__thumb" alt="" />
+                <span class="attach__name"></span>
+                <button class="attach__remove" type="button">REMOVE</button>
+              </div>
+            </label>
+          </div>
+
+          <div class="field">
+            <label class="field__lbl" for="reqPrize">PRIZE</label>
+            <input class="field__input" id="reqPrize" name="prize" type="text" placeholder="$500 or 1 SOL" required autocomplete="off" />
+          </div>
+
+          <div class="field">
+            <label class="field__lbl" for="reqDuration">DURATION</label>
+            <select class="field__input field__select" id="reqDuration" name="duration">
+              <option value="24 HOURS">24 HOURS</option>
+              <option value="3 DAYS">3 DAYS</option>
+              <option value="7 DAYS" selected>7 DAYS</option>
+              <option value="14 DAYS">14 DAYS</option>
+            </select>
+          </div>
+
+          <div class="field field--full">
+            <label class="field__lbl" for="reqContact">YOUR HANDLE</label>
+            <input class="field__input" id="reqContact" name="contact" type="text" placeholder="@username on X (so we can credit you)" required autocomplete="off" />
+          </div>
+        </div>
+
+        <button class="request__submit" type="submit">SUBMIT REQUEST</button>
+      </form>
+
+      <aside class="feed">
+        <div class="feed__head">
+          <h3 class="feed__title">RECENT REQUESTS</h3>
+          <span class="feed__count" id="feedCount">0</span>
+          <button class="feed__clear" id="feedClear" type="button" disabled>CLEAR MINE</button>
+        </div>
+        <div class="feed__list" id="feedList" aria-live="polite"></div>
+        <p class="feed__empty" id="feedEmpty" hidden>No requests yet. Be the first.</p>
+      </aside>
+
+    </div>
+
+    <p class="disclaimer">
+      Keep it legal. Nothing illegal, dangerous, harassing, or non-consensual will ever be approved.
+      Submitters are solely responsible for their own actions. NERVE and its operators are not liable
+      for any conduct undertaken in response to a posted bounty. By submitting, you confirm your
+      request follows all applicable laws.
+    </p>
+  </section>
+
+  <!-- ===================== CONFIRMATION MODAL ===================== -->
+  <div class="modal" id="confirmModal" hidden>
+    <div class="modal__panel">
+      <div class="modal__head">
+        <span class="modal__tag">REQUEST LOGGED</span>
+        <button class="modal__close" id="modalClose" type="button">CLOSE</button>
+      </div>
+      <h3 class="modal__title" id="modalTitle"></h3>
+      <p class="modal__brief" id="modalBrief"></p>
+      <div class="modal__meta">
+        <div><span class="modal__k">PRIZE</span><span class="modal__v" id="modalPrize"></span></div>
+        <div><span class="modal__k">DURATION</span><span class="modal__v" id="modalDur"></span></div>
+        <div><span class="modal__k">FROM</span><span class="modal__v" id="modalFrom"></span></div>
+      </div>
+      <div class="modal__actions">
+        <button class="modal__btn" id="modalCopy" type="button">COPY</button>
+        <a class="modal__btn modal__btn--share" id="modalShare" target="_blank" rel="noopener">POST ON X</a>
+      </div>
+      <p class="modal__note">We review every request. Approved dares appear on the PLAYER board.</p>
+    </div>
+  </div>
+
+  <!-- ===================== MOD VIEW (admin overlay) =====================
+       open with SHIFT + M  or  visit  index.html#mod
+  ====================================================================== -->
+  <div class="modview" id="modView" hidden>
+    <div class="modview__panel">
+      <header class="modview__head">
+        <h2 class="modview__title">MOD VIEW</h2>
+        <nav class="modview__tabs" role="tablist">
+          <button class="modtab is-active" data-tab="requests" type="button" role="tab">REQUESTS</button>
+          <button class="modtab"           data-tab="bounties" type="button" role="tab">BOUNTIES</button>
+        </nav>
+        <button class="modview__close" id="modClose" type="button">CLOSE</button>
+      </header>
+      <div class="modview__body">
+        <section class="modpane is-active" id="modPaneRequests"></section>
+        <section class="modpane"           id="modPaneBounties"></section>
+      </div>
+      <p class="modview__hint">Press SHIFT + M (or ESC) to toggle. Changes save instantly to your browser.</p>
+    </div>
+  </div>
+
+  <!-- global rising hearts (active on home + watcher) -->
+  <div class="hearts" id="hearts" aria-hidden="true"></div>
+
+  <!-- soundtrack — starts on first WATCHER/PLAYER click, loops -->
+  <audio id="songAudio" src="assets/song.mp4" loop preload="auto"></audio>
+  <button class="audio-toggle is-paused" id="audioToggle" type="button">PLAY</button>
+
+  <!-- ===================== templates ===================== -->
+  <template id="tmplBounty">
+    <article class="bounty">
+      <div class="bounty__media">
+        <img alt="" />
+      </div>
+      <div class="bounty__num"></div>
+      <h3 class="bounty__title"></h3>
+      <p class="bounty__brief"></p>
+      <div class="bounty__prize"></div>
+      <button class="bounty__cta">ACCEPT</button>
+    </article>
+  </template>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
